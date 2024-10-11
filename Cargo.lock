@@ -2630,6 +2630,7 @@ dependencies = [
 [[package]]
 name = "parity-secp256k1"
 version = "0.7.0"
+source = "git+https://github.com/paritytech/rust-secp256k1?rev=d05fd8e152f8d110b587906e3d854196b086e42a#d05fd8e152f8d110b587906e3d854196b086e42a"
 dependencies = [
  "arrayvec 0.5.2",
  "cc",
