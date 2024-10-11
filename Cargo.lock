@@ -1183,6 +1183,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "google-chain-signatures"
+version = "0.1.0"
+dependencies = [
+ "base64 0.21.7",
+ "borsh 0.9.3",
+ "hex",
+ "near-bigint",
+ "near-sdk 4.1.1",
+ "near-sdk 5.5.0",
+ "near-workspaces",
+ "near_groth16_verifier",
+ "num-bigint 0.4.6",
+ "num-traits",
+ "serde_json",
+ "serde_json_canonicalizer",
+ "sha2 0.10.8",
+ "tokio",
+]
+
+[[package]]
 name = "h2"
 version = "0.4.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4556,26 +4576,6 @@ dependencies = [
  "sha1",
  "time",
  "zstd 0.11.2+zstd.1.5.2",
-]
-
-[[package]]
-name = "zk-verifier-test"
-version = "0.1.0"
-dependencies = [
- "base64 0.21.7",
- "borsh 0.9.3",
- "hex",
- "near-bigint",
- "near-sdk 4.1.1",
- "near-sdk 5.5.0",
- "near-workspaces",
- "near_groth16_verifier",
- "num-bigint 0.4.6",
- "num-traits",
- "serde_json",
- "serde_json_canonicalizer",
- "sha2 0.10.8",
- "tokio",
 ]
 
 [[package]]

@@ -1,4 +1,4 @@
-# zk-verifier-test
+# google-chain-signatures
 
 cargo-near-new-project-description
 
