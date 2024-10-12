@@ -1,4 +1,5 @@
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
+use near_sdk::AccountId;
 use near_sdk::{env, near_bindgen, serde_json::json, Gas, PanicOnDefault, Promise};
 use near_groth16_verifier::{Proof, Verifier};
 use near_bigint::U256;
@@ -15,16 +16,18 @@ use models::{SignRequest, DerivationPath, Meta};
 pub struct Contract {
     pub verifier: Verifier,
     moduli: Vec<Vec<U256>>,
+    signer_contract_id: AccountId
 }
 
 #[near_bindgen]
 impl Contract {
     #[init]
-    pub fn new(verifier: Verifier) -> Self {
+    pub fn new(verifier: Verifier, signer_contract_id: AccountId) -> Self {
         assert!(!env::state_exists(), "Already initialized");
         Self {
             verifier,
             moduli: Vec::new(),
+            signer_contract_id
         }
     }
 
@@ -86,7 +89,7 @@ impl Contract {
         const TGAS: u64 = 1_000_000_000_000;
         const GAS_FOR_MPC_CALL: Gas = Gas(100 * TGAS);
 
-        Promise::new("v1.signer-prod.testnet".parse().unwrap()).function_call(
+        Promise::new(self.signer_contract_id.clone()).function_call(
             "sign".to_string(),
             near_sdk::serde_json::to_vec(&args).unwrap(),
             deposit,
