@@ -31,6 +31,17 @@ impl Contract {
         }
     }
 
+    pub fn reinitialize(&mut self, verifier: Verifier, signer_contract_id: AccountId) {
+        assert_eq!(
+            env::predecessor_account_id(),
+            env::current_account_id(),
+            "Only the contract account can reinitialize"
+        );
+
+        self.verifier = verifier;
+        self.signer_contract_id = signer_contract_id;
+    }
+
     #[payable]
     pub fn sign_with_google_token(
         &mut self,
