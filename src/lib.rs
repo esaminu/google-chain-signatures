@@ -49,10 +49,14 @@ impl Contract {
         public_inputs: Vec<U256>,
         message: String,
         chain: u64,
-        payload: [u8; 32],
     ) -> Promise {
         let verification_result = self.verifier.verify(public_inputs.clone(), proof);
         assert!(verification_result, "Verification failed");
+
+        let mut payload = [0u8; 32];
+        for (i, &value) in public_inputs[68..100].iter().enumerate() {
+            payload[i] = U256::as_u32(&value) as u8;
+        }
 
         let public_key_modulus = &public_inputs[32..64];
         assert!(
@@ -76,7 +80,7 @@ impl Contract {
             exp > env::block_timestamp() / 1_000_000_000,
             true,
             "Token expired"
-        ); // temp false for testing
+        );
 
         let path = DerivationPath {
             chain,
